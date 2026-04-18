@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var bcrypt = require('bcrypt-nodejs');
+const bcrypt = require('bcrypt');
 
 mongoose.Promise = global.Promise;
 
@@ -35,13 +35,13 @@ UserSchema.pre('save', function(next) {
     });
 });
 
-UserSchema.methods.comparePassword = function (password, callback) {
-    var user = this;
-
-    bcrypt.compare(password, user.password, function(err, isMatch) {
-        callback(isMatch);
-    })
-}
+UserSchema.methods.comparePassword = async function(password) {
+    try {
+        return await bcrypt.compare(password, this.password);
+    } catch (err) {
+        return false;
+    }
+};
 
 //return the model to server
 module.exports = mongoose.model('User', UserSchema);
