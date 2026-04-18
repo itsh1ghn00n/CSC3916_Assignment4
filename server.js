@@ -25,27 +25,37 @@ const rp = require('request-promise');
 const GA_TRACKING_ID = process.env.GA_KEY;
 
 function trackDimension(category, action, label, value, dimension, metric) {
-    var options = {
-        method: 'GET',
+
+    var options = { method: 'GET',
         url: 'https://www.google-analytics.com/collect',
-        qs: {
-            v: '1',
-            tid: GA_TRACKING_ID,
-            cid: crypto.randomBytes(16).toString("hex"),
-            t: 'event',
-            ec: category,
-            ea: action,
-            el: label,
-            ev: value,
-            cd1: dimension,
-            cm1: metric
-        }
-    };
+        qs:
+            {   // API Version.
+                v: '1',
+                // Tracking ID / Property ID.
+                tid: GA_TRACKING_ID,
+                // Random Client Identifier. Ideally, this should be a UUID that
+                // is associated with particular user, device, or browser instance.
+                cid: crypto.randomBytes(16).toString("hex"),
+                // Event hit type.
+                t: 'event',
+                // Event category.
+                ec: category,
+                // Event action.
+                ea: action,
+                // Event label.
+                el: label,
+                // Event value.
+                ev: value,
+                // Custom Dimension
+                cd1: dimension,
+                // Custom Metric
+                cm1: metric
+            },
+        headers:
+            {  'Cache-Control': 'no-cache' } };
 
     return rp(options);
 }
-
-// Removed getJSONObjectForMovieRequirement as it's not used
 
 router.post('/signup', async (req, res) => { // Use async/await
   if (!req.body.username || !req.body.password) {
@@ -208,11 +218,23 @@ router.post('/reviews', authJwtController.isAuthenticated, async (req, res) => {
   }
 });
 
+router.route('/test')
+    .get(function (req, res) {
+        // Event value must be numeric.
+        trackDimension('Feedback', 'Rating', 'Feedback for Movie', '3', 'Guardian\'s of the Galaxy 2', '1')
+            .then(function (response) {
+                console.log(response.body);
+                res.status(200).send('Event tracked.').end();
+            })
+    });
+
+
 app.use('/', router);
 
 const PORT = process.env.PORT || 8080; // Define PORT before using it
 app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
-
+console.log("http://localhost:8080/test");
+app.listen(process.env.PORT || 8080);
 module.exports = app; // for testing only
