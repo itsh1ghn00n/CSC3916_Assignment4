@@ -1,27 +1,16 @@
 ## Postman Collection
 
-Assignment4
+### Assignment4
+By Dominic Castaldo
 
 This Postman collection includes:
 
-- Create and retrieve reviews for movies
+- Creation and retrieval of reviews for movies
 - View movies with associated reviews
+- Error handling, for invalid movies, and invalid movie id's
 
 ### Postman Collection
-<div class="postman-run-button"
-data-postman-action="collection/fork"
-data-postman-visibility="public"
-data-postman-var-1="51837659-3a8d9322-d1c6-4922-a9ab-9693c8f95eac"
-data-postman-collection-url="entityId=51837659-3a8d9322-d1c6-4922-a9ab-9693c8f95eac&entityType=collection&workspaceId=538f6287-84b0-4e92-9fd0-b7faf3574501"></div>
-<script type="text/javascript">
-  (function (p,o,s,t,m,a,n) {
-    !p[s] && (p[s] = function () { (p[t] || (p[t] = [])).push(arguments); });
-    !o.getElementById(s+t) && o.getElementsByTagName("head")[0].appendChild((
-      (n = o.createElement("script")),
-      (n.id = s+t), (n.async = 1), (n.src = m), n
-    ));
-  }(window, document, "_pm", "PostmanRunObject", "https://run.pstmn.io/button.js"));
-</script>
+[<img src="https://run.pstmn.io/button.svg" alt="Run In Postman" style="width: 128px; height: 32px;">](https://app.getpostman.com/run-collection/51837659-3a8d9322-d1c6-4922-a9ab-9693c8f95eac?action=collection%2Ffork&source=rip_markdown&collection-url=entityId%3D51837659-3a8d9322-d1c6-4922-a9ab-9693c8f95eac%26entityType%3Dcollection%26workspaceId%3D538f6287-84b0-4e92-9fd0-b7faf3574501)
 
 
 ### React App
