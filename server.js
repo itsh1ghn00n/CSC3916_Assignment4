@@ -219,5 +219,4 @@ app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
 });
 console.log("http://localhost:8080/test");
-app.listen(process.env.PORT || 8080);
 module.exports = app; // for testing only
